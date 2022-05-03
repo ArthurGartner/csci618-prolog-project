@@ -1,24 +1,13 @@
 /* Project demo mimicking voice assistants. */
-equals(temperature, 30).
-equals(brightness, 50).
-equals(volume, 50).
-equals(light, off).
-equals(thermostat, on).
-equals(tv, off).
-
+/* This demonstrates top down string parsing */
 /*Context free grammar structure*/
 /* re = request to voice assitant. Consists of wake word and valid sentence */
 re --> aw, vs.
-/* vs = a valid sentence is either a command or question.*/
+/* vs = a valid sentence is either a command.*/
 /*Imperative sentences*/
 /* Can contain phrasal verbs */
 vs --> state_verb, noun_item.
 vs --> sv, noun_item, snc.
-/* Question consists of interogative word, auxillary verb, subject and main verb */
-/*vs --> iw, av, np.*/ 
-
-/*Interogative words*/
-iw --> [what].
 
 /*Assistant wake words and phrases*/
 aw --> [alexa].
@@ -69,3 +58,12 @@ val_temp --> [50], metric_temp.
 
 metric --> [percent].
 metric_temp --> [farenheight].
+
+/* Attemped interactive demo, does not work */
+begin_demo :-
+    write("Type in an input"),
+    read(Command),
+    split_string(Command, " ", "", L),
+    write(L),
+    re(Command, []).
+
